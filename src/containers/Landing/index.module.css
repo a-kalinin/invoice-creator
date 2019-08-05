@@ -1,0 +1,6 @@
+.flex{
+  display: flex;
+}
+.flex > * {
+  margin-right: 20px;
+}

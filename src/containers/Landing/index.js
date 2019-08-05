@@ -3,11 +3,14 @@ import dateformat from 'dateformat';
 import CalendarView from '../../components/CalendarView';
 import DateAndRateForm from '../../components/DateAndRateForm';
 import Total from '../../components/Total';
+import InvoiceData from '../../components/InvoiceData';
 import * as Dates from '../../utils/Dates';
 import { HoursContext } from '../../context/Hours';
 import { DateContext } from '../../context/Date';
 import { HourRateContext } from '../../context/HourRate';
 import { InvoiceContext } from '../../context/Invoice';
+import { contractDate } from '../../utils/constants';
+import style from './index.module.css';
 
 const Landing = () => {
   const initYear = new Date().getFullYear();
@@ -17,7 +20,7 @@ const Landing = () => {
   const [month, setMonth] = React.useState(new Date(initYear, initMonth).getMonth());
   const [hourRate, setHourRate] = React.useState('25');
   const [date, setDate] = React.useState(dateformat('dd.mm.yyyy'));
-  const [number, setNumber] = React.useState('25');
+  const [number, setNumber] = React.useState(Dates.countMonthsFromDate(contractDate));
   const [hours, setHours] = React.useState(Dates.getInitialHours(year, month));
 
   React.useEffect(() => { setHours(Dates.getInitialHours(year, month)); }, [month, year]);
@@ -31,13 +34,16 @@ const Landing = () => {
       <HoursContext.Provider value={{ hours, setHours }}>
         <DateContext.Provider value={{ year, setYear, month, setMonth }}>
           <HourRateContext.Provider value={{ hourRate, setHourRate }}>
-            <div>
-              <DateAndRateForm />
-              <br />
-              <CalendarView />
-              <br />
-              <br />
-              <Total />
+            <div className={style.flex}>
+              <div>
+                <DateAndRateForm />
+                <br />
+                <CalendarView />
+                <br />
+                <br />
+                <Total />
+              </div>
+              <InvoiceData />
             </div>
           </HourRateContext.Provider>
        </DateContext.Provider>

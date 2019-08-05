@@ -46,6 +46,12 @@ export const getInitialHours = (year, month) => {
     });
 };
 
+export const countMonthsFromDate = (date) => {
+  const dateObj = new Date(date);
+  const now = new Date();
+  return now.getMonth() - dateObj.getMonth() + (12 * (now.getFullYear() - dateObj.getFullYear()));
+};
+
 export const get = (year, month) => {
   const startDate = getStartDateObj(year, month);
   const startDay = getStartDay(startDate);
