@@ -1,0 +1,11 @@
+.yearInput{
+  width: 50px;
+  text-align: center;
+  margin-left: 6px;
+}
+.monthBtn{
+  margin: 2px;
+}
+.monthBtn.active{
+  background-color: aquamarine;
+}

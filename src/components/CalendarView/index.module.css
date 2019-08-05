@@ -1,0 +1,22 @@
+.root{
+  display: inline-flex;
+  background-color: #f6f6f6;
+  padding: 10px;
+}
+
+.value{
+  font-size: 60px;
+  font-weight: 700;
+  width: 170px;
+}
+
+.table{
+  background-color: #f6f6f6;
+}
+.table td{
+  padding: 0 3px;
+  text-align: center;
+}
+.weekend{
+  color: red;
+}

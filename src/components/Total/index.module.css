@@ -1,0 +1,9 @@
+.total {
+  font-size: 30px;
+  /*color: #777;*/
+  font-weight: 700;
+}
+
+.total span{
+  color: #599;
+}

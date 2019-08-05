@@ -1,0 +1,20 @@
+.dateInput{
+  width: 22px;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.empty{
+  background-color: lightpink;
+}
+
+.normal{
+  background-color: white;
+}
+
+.higher{
+  background-color: bisque;
+}
+.lower{
+  background-color: bisque;
+}
