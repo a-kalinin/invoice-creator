@@ -1,4 +1,4 @@
-#invoice-creator
+# invoice-creator
 
 Hello, < username >!
 
@@ -13,11 +13,11 @@ That's all!
 If you will find this project helpful for you - you can use this code without any
 limitations.
 
-####Web form view:
+#### Web form view:
 
 ![Web form view](./src/demo-pic/demo-1.png)
 
-####PDF file view:
+#### PDF file view:
 
 ![PDF file view](./src/demo-pic/demo-2.png)
 
