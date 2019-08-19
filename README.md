@@ -1,6 +1,33 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#invoice-creator
 
-## Available Scripts
+Hello, < username >!
+
+What is this project about? Just a tool I use for creating per-month invoices for
+one my stable client.
+- It takes my data, saved in `.env.local` file.
+- Adds some data such as worked hours, invoice's date, and similar,
+which I set within web form.
+- And, finally, produces PDF file I could send to client.
+That's all!
+
+If you will find this project helpful for you - you can use this code without any
+limitations.
+
+####Web form view:
+
+![Web form view](./src/demo-pic/demo-1.png)
+
+####PDF file view:
+
+![PDF file view](./src/demo-pic/demo-2.png)
+
+
+## Some more info :)
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+For this project I used React.context, React.hooks, Jest unit-tests, JSPDF file creating.
+
+### Available Scripts
 
 In the project directory, you can run:
 
@@ -36,33 +63,3 @@ If you aren’t satisfied with the build tool and configuration choices, you can
 Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
