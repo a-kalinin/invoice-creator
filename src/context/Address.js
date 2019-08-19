@@ -18,6 +18,7 @@ const contrAgentData = [
 
 export const AddressContext = React.createContext({
   my: myData,
+  myName: process.env.REACT_APP_MY_NAME,
   myBankSwift: process.env.REACT_APP_MY_BANK_SWIFT || '',
   myBankAccount: process.env.REACT_APP_MY_BANK_ACCOUNT || '',
   contrAgent: contrAgentData,

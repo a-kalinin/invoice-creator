@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as Dates from '../../utils/Dates';
 import Week from '../Week';
 import style from './index.module.css';
-import { monthsShort } from '../../utils/constants';
+import { monthsShort, workingDays, weekendDays } from '../../utils/constants';
 import { DateContext } from '../../context/Date';
 
 const CalendarView = () => {
@@ -15,8 +15,8 @@ const CalendarView = () => {
       <table className={style.table}>
         <thead>
           <tr>
-            {['Mon', 'Tue', 'Wed', 'Thu', 'Fri'].map(day => <th key={day}>{day}</th>)}
-            {['Sat', 'Sun'].map(day => <th key={day} className={style.weekend}>{day}</th>)}
+            {workingDays.map(day => <th key={day}>{day}</th>)}
+            {weekendDays.map(day => <th key={day} className={style.weekend}>{day}</th>)}
           </tr>
         </thead>
         <tbody>

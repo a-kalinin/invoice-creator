@@ -11,6 +11,7 @@ import { HourRateContext } from '../../context/HourRate';
 import { InvoiceContext } from '../../context/Invoice';
 import { contractDate } from '../../utils/constants';
 import style from './index.module.css';
+import PdfButton from '../../components/PdfButton';
 
 const Landing = () => {
   const initYear = new Date().getFullYear();
@@ -20,7 +21,7 @@ const Landing = () => {
   const [month, setMonth] = React.useState(new Date(initYear, initMonth).getMonth());
   const [hourRate, setHourRate] = React.useState('25');
   const [date, setDate] = React.useState(dateformat('dd.mm.yyyy'));
-  const [number, setNumber] = React.useState(Dates.countMonthsFromDate(contractDate));
+  const [number, setNumber] = React.useState(Dates.countMonthsSinceDate(contractDate));
   const [hours, setHours] = React.useState(Dates.getInitialHours(year, month));
 
   React.useEffect(() => { setHours(Dates.getInitialHours(year, month)); }, [month, year]);
@@ -43,7 +44,11 @@ const Landing = () => {
                 <br />
                 <Total />
               </div>
-              <InvoiceData />
+              <div>
+                <InvoiceData />
+                <br />
+                <PdfButton />
+              </div>
             </div>
           </HourRateContext.Provider>
        </DateContext.Provider>
