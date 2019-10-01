@@ -124,27 +124,28 @@ class GenPdf {
 
   static produceFooter = ({ amount }) => ([
     [
-      { content: '', colSpan: 5, styles: styles.infoEmpty },
+      { content: '', styles: styles.infoEmpty },
+      { content: 'Not subject to VAT', colSpan: 4, styles: styles.info2 },
       { content: 'SUBTOTAL', styles: styles.tableFooter1 },
       { content: `$ ${amount}`, styles: styles.tableFooter5 },
       { content: '', styles: styles.infoEmpty },
     ],
     [
       { content: '', styles: styles.infoEmpty },
-      { content: 'Not subject to VAT', colSpan: 4, styles: styles.info2 },
+      { content: 'exempt VAT art. 7 TER-DPR 633/72', colSpan: 4, styles: styles.info2 },
       { content: 'TAX RATE', styles: styles.tableFooter2 },
       { content: "0,000%", styles: styles.tableFooter6 },
       { content: '', styles: styles.infoEmpty },
     ],
     [
-      { content: '', styles: styles.infoEmpty },
-      { content: 'exempt VAT art. 7 TER-DPR 633/72', colSpan: 4, styles: styles.info2 },
+      { content: '', colSpan: 5, styles: styles.infoEmpty },
       { content: 'TOTAL TAX', styles: styles.tableFooter3 },
       { content: "$ 0", styles: styles.tableFooter6 },
       { content: '', styles: styles.infoEmpty },
     ],
     [
-      { content: '', colSpan: 5, styles: styles.infoEmpty },
+      { content: '', styles: styles.infoEmpty },
+      { content: 'Make all checks payable to:', colSpan: 4 , styles: styles.info2 },
       { content: 'TOTAL', styles: styles.tableFooter4 },
       { content: `$ ${amount}`, styles: styles.tableFooter7 },
       { content: '', styles: styles.infoEmpty },
@@ -152,10 +153,6 @@ class GenPdf {
   ]);
 
   static produceAccount = ({ myName, myBankSwift, myBankAccount }) => ([
-    [
-      { content: '', styles: styles.infoEmpty },
-      { content: 'Make all checks payable to:', colSpan: 7 , styles: styles.info2 },
-    ],
     [
       { content: '', styles: styles.infoEmpty },
       { content: myName, colSpan: 7 , styles: styles.tableFooter2 },
