@@ -283,3 +283,217 @@ export const createPdf = (data) => {
   pdf.renderInvoice();
   pdf.save();
 };
+
+class GenPdf2 {
+  constructor(data, orientation = 'p') {
+    this.data = data;
+    this.doc = new Pdf({ orientation });
+  }
+
+  setData = (data) => {
+    this.data = data;
+  };
+
+  static setLocaleToNumeral = () => {
+    if (!numeral.locales.local) {
+      numeral.register('locale', 'local', {
+        delimiters: {
+          thousands: ' ',
+          decimal: ','
+        },
+        abbreviations: {
+          thousand: 'k',
+          million: 'm',
+          billion: 'b',
+          trillion: 't'
+        },
+        ordinal : function (number) {
+          return '';
+        },
+        currency: {
+          symbol: '€'
+        }
+      });
+    }
+    numeral.locale('local');
+  };
+
+  static produceFormatting = () => ([
+    [
+      { content: '', styles: styles.cell_1 },
+      { content: '', styles: styles.cell_2 },
+      { content: '', styles: styles.cell_3 },
+      { content: '', styles: styles.cell_4 },
+      { content: '', styles: styles.cell_5 },
+      { content: '', styles: styles.cell_6 },
+      { content: '', styles: styles.cell_7 },
+      { content: '', styles: styles.cell_8 },
+    ]
+  ]);
+
+  static produceHeader = ({ myName, newNumber, date }) => ([
+    [
+      { content: '', styles: styles.header1 },
+      { content: myName, colSpan: 4, styles: styles.header2 },
+      { content: 'INVOICE', colSpan: 2, styles: styles.header3 },
+      { content: '', styles: styles.header1 },
+    ],
+    [
+      { content: '', styles: styles.subheader1 },
+      { content: `INVOICE #${newNumber}`, colSpan: 3, styles: styles.subheader2 },
+      { content: `DATE ${date}`, colSpan: 3, styles: styles.subheader3 },
+      { content: '', styles: styles.subheader1 },
+    ],
+  ]);
+
+  static produceAddressArea = ({ my, contrAgent }) => ([
+    [
+      { content: '', colSpan: 8, styles: styles.infoEmpty },
+    ],
+    [
+      { content: '', styles: styles.info1 },
+      { content: 'MAILING', styles: styles.infoBanner1 },
+      { content: my[0] || '', styles: styles.info1 },
+      { content: 'BILL', styles: styles.infoBanner3 },
+      { content: contrAgent[0] || '', colSpan: 3, styles: styles.info1 },
+      { content: '', styles: styles.info1 },
+    ],
+    [
+      { content: '', styles: styles.info1 },
+      { content: 'INFO', styles: styles.infoBanner2 },
+      { content: my[1] || '', styles: styles.info1 },
+      { content: 'TO', styles: styles.infoBanner4 },
+      { content: contrAgent[1] || '', colSpan: 3, styles: styles.info1 },
+      { content: '', styles: styles.info1 },
+    ],
+    ...new Array(3).fill(null).map((el, i) => (
+      [
+        { content: '', styles: styles.info1 },
+        { content: '', styles: styles.infoBanner2 },
+        { content: my[2 + i] || '', styles: styles.info1 },
+        { content: '', styles: styles.infoBanner4 },
+        { content: contrAgent[2 + i] || '', colSpan: 3, styles: styles.info1 },
+        { content: '', styles: styles.info1 },
+      ]
+    )),
+    [
+      { content: '', colSpan: 8, styles: styles.infoEmpty },
+    ],
+  ]);
+
+  static produceTable = ({ jobString, hoursTotal, hourRate, amount }) => ([
+    [
+      { content: '', styles: styles.tableHeader },
+      { content: 'SERVICES', colSpan: 3, styles: styles.tableHeader },
+      { content: '', styles: styles.tableHeader2 },
+      { content: '', styles: styles.tableHeader2 },
+      { content: 'AMOUNT', styles: styles.tableHeader3 },
+      { content: '', styles: styles.tableHeader },
+    ],
+    [
+      { content: '', styles: styles.tableBody1 },
+      { content: jobString, colSpan: 3, styles: styles.tableBody1 },
+      { content: '', styles: styles.tableBody2 },
+      { content: '', styles: styles.tableBody2 },
+      { content: amount, styles: styles.tableBody3 },
+      { content: '', styles: styles.tableBody1 },
+    ],
+  ]);
+
+  static produceFooter = ({ amount }) => ([
+    [
+      { content: '', styles: styles.infoEmpty },
+      { content: 'Not subject to VAT', colSpan: 4, styles: styles.info2 },
+      { content: 'SUBTOTAL', styles: styles.tableFooter1 },
+      { content: `€ ${amount}`, styles: styles.tableFooter5 },
+      { content: '', styles: styles.infoEmpty },
+    ],
+    [
+      { content: '', styles: styles.infoEmpty },
+      { content: 'exempt VAT art. 7 TER-DPR 633/72', colSpan: 4, styles: styles.info2 },
+      { content: 'TAX RATE', styles: styles.tableFooter2 },
+      { content: "0,000%", styles: styles.tableFooter6 },
+      { content: '', styles: styles.infoEmpty },
+    ],
+    [
+      { content: '', colSpan: 5, styles: styles.infoEmpty },
+      { content: 'TOTAL TAX', styles: styles.tableFooter3 },
+      { content: "€ 0", styles: styles.tableFooter6 },
+      { content: '', styles: styles.infoEmpty },
+    ],
+    [
+      { content: '', styles: styles.infoEmpty },
+      { content: 'Make all checks payable to:', colSpan: 4 , styles: styles.info2 },
+      { content: 'TOTAL', styles: styles.tableFooter4 },
+      { content: `€ ${amount}`, styles: styles.tableFooter7 },
+      { content: '', styles: styles.infoEmpty },
+    ],
+  ]);
+
+  static produceAccount = ({ myName, myBankSwift, myBankAccount }) => ([
+    [
+      { content: '', styles: styles.infoEmpty },
+      { content: myName, colSpan: 7 , styles: styles.tableFooter2 },
+    ],
+    [
+      { content: '', styles: styles.infoEmpty },
+      { content: `SWIFT-code: ${myBankSwift}`, colSpan: 7 , styles: styles.info1 },
+    ],
+    [
+      { content: '', styles: styles.infoEmpty },
+      { content: `Account: ${myBankAccount}`, colSpan: 7 , styles: styles.info1 },
+    ],
+    [
+      { content: '', colSpan: 8, styles: styles.infoEmpty },
+    ],
+  ]);
+
+  renderInvoice = () => {
+    GenPdf2.setLocaleToNumeral();
+
+    const {
+      number, date, myName, my, myBankSwift, myBankAccount,
+      contrAgent, hours, month, year, hourRate,
+    } = this.data;
+    const newNumber =
+      /^\d+$/.test(number.toString())
+        ? `00-${numeral(number).format('000000')}`
+        : number;
+    const hoursTotal = hours.reduce((acc, el) => acc + Number(el), 0);
+    const amount = numeral(2500).multiply(1).format('0,0.00');
+    const nextMonth = (month + 1) % 12;
+    const nextMonthYear = month + 1 >= 12 ? year + 1 : year;
+    const jobString = `Activity of development software for the month of ${
+      months[month]} as per agreement stipulated in date ${
+      months[month]} 28th ${nextMonthYear}`;
+
+    const formattedData = [
+      ...GenPdf2.produceFormatting(),
+      ...GenPdf2.produceHeader({ myName, newNumber, date }),
+      ...GenPdf2.produceAddressArea({ my, contrAgent }),
+      ...GenPdf2.produceTable({ jobString, hoursTotal, hourRate, amount }),
+      ...GenPdf2.produceFooter({ amount }),
+      ...GenPdf2.produceAccount({ myName, myBankSwift, myBankAccount }),
+    ];
+
+    this.doc.autoTable({
+      theme: 'striped',
+      startY: 5,
+      bodyStyles: { fontSize: 10 },
+      body: formattedData,
+    });
+  };
+
+  save = () => {
+    const { filenamePrefix, year, month } = this.data;
+    const filename = generateFileName(filenamePrefix, year, month);
+    this.doc.save(filename);
+  }
+}
+
+export const createPdf2 = (data) => {
+  const pdf = new GenPdf2();
+  pdf.setData(data);
+  pdf.renderInvoice();
+  pdf.save();
+};
