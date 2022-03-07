@@ -4,13 +4,13 @@ import { InvoiceContext } from '../../context/Invoice';
 import { DateContext } from '../../context/Date';
 import { HoursContext } from '../../context/Hours';
 import { HourRateContext } from '../../context/HourRate';
-import { filenamePrefix } from '../../utils/constants';
-import { createPdf } from '../../utils/pdf';
+import { CONTRACT_TYPES, filenamePrefix } from '../../utils/constants';
+import { createPdf, createPdf2 } from '../../utils/pdf';
 import styles from './index.module.css';
 
 const PdfButton = () => {
   const { my, myName, myBankSwift, myBankAccount, contrAgent } = React.useContext(AddressContext);
-  const { date, number } = React.useContext(InvoiceContext);
+  const { date, number, contractType } = React.useContext(InvoiceContext);
   const { month, year } = React.useContext(DateContext);
   const { hours } = React.useContext(HoursContext);
   const { hourRate } = React.useContext(HourRateContext);
@@ -30,7 +30,8 @@ const PdfButton = () => {
       hourRate,
       filenamePrefix,
     };
-    createPdf(data);
+    if (contractType === CONTRACT_TYPES.HOUR_RATE) createPdf(data);
+    else if (contractType === CONTRACT_TYPES.MONTH_RATE) createPdf2(data);
   };
 
   return (
