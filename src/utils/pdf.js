@@ -453,14 +453,14 @@ class GenPdf2 {
 
     const {
       number, date, myName, my, myBankSwift, myBankAccount,
-      contrAgent, hours, month, year, hourRate,
+      contrAgent, hours, month, year, hourRate, monthRate,
     } = this.data;
     const newNumber =
       /^\d+$/.test(number.toString())
         ? `00-${numeral(number).format('000000')}`
         : number;
     const hoursTotal = hours.reduce((acc, el) => acc + Number(el), 0);
-    const amount = numeral(2500).multiply(1).format('0,0.00');
+    const amount = numeral(monthRate).format('0,0.00');
     const nextMonth = (month + 1) % 12;
     const nextMonthYear = month + 1 >= 12 ? year + 1 : year;
     const jobString = `Activity of development software for the month of ${

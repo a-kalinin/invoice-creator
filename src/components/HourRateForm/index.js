@@ -2,7 +2,7 @@ import * as React from 'react';
 import { HourRateContext } from '../../context/HourRate';
 import style from './index.module.css';
 
-const RateForm = () => {
+const HourRateForm = () => {
   const onFocus = (event) => {
     event.target.setSelectionRange(0, 4);
   };
@@ -23,7 +23,7 @@ const RateForm = () => {
   );
 };
 
-RateForm.defaultProps = {
+HourRateForm.defaultProps = {
 };
 
-export default RateForm;
+export default HourRateForm;

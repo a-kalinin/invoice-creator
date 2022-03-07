@@ -7,8 +7,7 @@ import HourRateContractForm from '../../components/HourRateContractForm';
 import InvoiceBaseContextProvider from '../../context/providers/InvoiceBaseContextProvider';
 import HourRateContractContextProvider
   from '../../context/providers/HourRateContractContextProvider';
-import { InvoiceContext } from '../../context/Invoice';
-import { CONTRACT_TYPES } from '../../utils/constants';
+import MonthRateContractForm from '../../components/MonthRateContractForm';
 
 const Landing = () => {
   return (
@@ -18,6 +17,7 @@ const Landing = () => {
           <div>
             <InvoiceMonthForm />
             <HourRateContractForm />
+            <MonthRateContractForm />
           </div>
           <div>
             <InvoiceData />

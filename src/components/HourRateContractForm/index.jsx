@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import RateForm from '../RateForm';
+import HourRateForm from '../HourRateForm';
 import CalendarView from '../CalendarView';
 import Total from '../Total';
 import { InvoiceContext } from '../../context/Invoice';
@@ -10,7 +10,7 @@ const HourRateContractForm = () => {
   const { contractType } = React.useContext(InvoiceContext);
   return contractType === CONTRACT_TYPES.HOUR_RATE && (
     <div>
-      <RateForm />
+      <HourRateForm />
       <br />
       <CalendarView />
       <br />

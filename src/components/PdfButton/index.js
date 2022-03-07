@@ -7,6 +7,7 @@ import { HourRateContext } from '../../context/HourRate';
 import { CONTRACT_TYPES, filenamePrefix } from '../../utils/constants';
 import { createPdf, createPdf2 } from '../../utils/pdf';
 import styles from './index.module.css';
+import { MonthRateContext } from '../../context/MonthRate';
 
 const PdfButton = () => {
   const { my, myName, myBankSwift, myBankAccount, contrAgent } = React.useContext(AddressContext);
@@ -14,6 +15,7 @@ const PdfButton = () => {
   const { month, year } = React.useContext(DateContext);
   const { hours } = React.useContext(HoursContext);
   const { hourRate } = React.useContext(HourRateContext);
+  const { monthRate } = React.useContext(MonthRateContext);
 
   const onClick = () => {
     const data = {
@@ -28,6 +30,7 @@ const PdfButton = () => {
       month,
       year,
       hourRate,
+      monthRate,
       filenamePrefix,
     };
     if (contractType === CONTRACT_TYPES.HOUR_RATE) createPdf(data);
