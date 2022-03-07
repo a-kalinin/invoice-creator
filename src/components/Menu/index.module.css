@@ -1,9 +1,9 @@
 .root{
   display: flex;
   width: 100%;
-  padding: 20px;
+  padding: 10px 20px 20px;
   background-color: var(--primary-2);
-  align-items: center;
+  align-items: baseline;
   color: #fff;
 }
 
