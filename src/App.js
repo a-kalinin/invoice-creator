@@ -1,12 +1,15 @@
 import React from 'react';
+import { BrowserRouter } from "react-router-dom";
 import Landing from './containers/Landing'
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <Landing />
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Landing />
+      </div>
+    </BrowserRouter>
   );
 }
 
