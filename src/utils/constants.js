@@ -14,3 +14,9 @@ export const weekendDays = ['Sat', 'Sun'];
 export const contractDate = process.env.REACT_APP_CONTRACT_DATE;
 
 export const filenamePrefix = process.env.REACT_APP_FILENAME_PREFIX;
+
+export const CONTRACT_TYPES = {
+  FIXED: 'FIXED',
+  MONTH_RATE: 'MONTH_RATE',
+  HOUR_RATE: 'HOUR_RATE',
+}

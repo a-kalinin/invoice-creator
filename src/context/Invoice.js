@@ -5,4 +5,6 @@ export const InvoiceContext = React.createContext({
   setDate: () => {},
   number: '',
   setNumber: () => {},
+  contractType: '',
+  setContractType: () => {},
 });
