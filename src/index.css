@@ -1,3 +1,34 @@
+/* Адрес цветовой схемы: https://colorscheme.ru/#37623w0w0w0w0 */
+:root {
+  /* Основной Цвет */
+  --primary-0: #00aa72;
+  --primary-1: #207f60;
+  --primary-2: #006e4a;
+  --primary-3: #35d4a0;
+  --primary-4: #60d4ae;
+
+  /* Вторичный Цвет A */
+  --secondary-a-0: #1240ab;
+  --secondary-a-1: #2a4480;
+  --secondary-a-2: #06266f;
+  --secondary-a-3: #4671d5;
+  --secondary-a-4: #6c8cd5;
+
+  /* Вторичный Цвет B */
+  --secondary-b-0: #84e900;
+  --secondary-b-1: #76af2c;
+  --secondary-b-2: #569700;
+  --secondary-b-3: #a4f43d;
+  --secondary-b-4: #baf46e;
+
+  /* Дополнительный Цвет */
+  --complement-0: #ff5600;
+  --complement-1: #bf6030;
+  --complement-2: #a63800;
+  --complement-3: #ff8040;
+  --complement-4: #ffa273;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
