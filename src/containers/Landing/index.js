@@ -1,7 +1,7 @@
 import * as React from 'react';
 import dateformat from 'dateformat';
 import CalendarView from '../../components/CalendarView';
-import DateAndRateForm from '../../components/DateAndRateForm';
+import InvoiceMonthForm from '../../components/InvoiceMonthForm';
 import Total from '../../components/Total';
 import InvoiceData from '../../components/InvoiceData';
 import * as Dates from '../../utils/Dates';
@@ -12,6 +12,7 @@ import { InvoiceContext } from '../../context/Invoice';
 import { contractDate } from '../../utils/constants';
 import style from './index.module.css';
 import PdfButton from '../../components/PdfButton';
+import RateForm from '../../components/RateForm';
 
 const Landing = () => {
   const initYear = new Date().getFullYear();
@@ -37,7 +38,8 @@ const Landing = () => {
           <HourRateContext.Provider value={{ hourRate, setHourRate }}>
             <div className={style.flex}>
               <div>
-                <DateAndRateForm />
+                <InvoiceMonthForm />
+                <RateForm />
                 <br />
                 <CalendarView />
                 <br />
