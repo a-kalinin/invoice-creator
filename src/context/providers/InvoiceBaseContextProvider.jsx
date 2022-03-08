@@ -10,7 +10,7 @@ const InvoiceBaseContextProvider = ({ children }) => {
   const initYear = new Date().getFullYear();
   const initMonth = new Date().getMonth() - 1;
 
-  const [contractType, setContractType] = React.useState(CONTRACT_TYPES.HOUR_RATE);
+  const [contractType, setContractType] = React.useState(CONTRACT_TYPES.MONTH_RATE);
   const [year, setYearPure] = React.useState(new Date(initYear, initMonth).getFullYear());
   const [month, setMonth] = React.useState(new Date(initYear, initMonth).getMonth());
   const [date, setDate] = React.useState(dateformat('dd.mm.yyyy'));

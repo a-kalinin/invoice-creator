@@ -16,7 +16,11 @@ export const contractDate = process.env.REACT_APP_CONTRACT_DATE;
 export const filenamePrefix = process.env.REACT_APP_FILENAME_PREFIX;
 
 export const CONTRACT_TYPES = {
-  FIXED: 'FIXED',
+  FIXED_PRICE: 'FIXED_PRICE',
   MONTH_RATE: 'MONTH_RATE',
   HOUR_RATE: 'HOUR_RATE',
+}
+
+export const STORAGE = {
+  MONTH_RATE: 'MONTH_RATE',
 }
