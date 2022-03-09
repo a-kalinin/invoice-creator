@@ -8,24 +8,17 @@ import LocalStorageUsage from '../utils/LocalStorageUsage';
  * IMPORTANT: passed value should be serializable, it will be JSON-stringified, parsed and returned.
  * */
 function useLocalStorage(storageName, dataToSave) {
-  const [storage, setStorage] = React.useState(new LocalStorageUsage(storageName, dataToSave));
+  const storage = new LocalStorageUsage(storageName, dataToSave);
   const [prevDataJson, setPrevDataJson] = React.useState(JSON.stringify(dataToSave));
   const [prevStorageName, setPrevStorageName] = React.useState(storageName);
+  const dataJson = JSON.stringify(dataToSave);
 
-  React.useEffect(() => {
-    if (prevStorageName !== storageName) {
-      setStorage(new LocalStorageUsage(storageName, dataToSave));
-      setPrevStorageName(storageName);
-    }
-  }, [dataToSave, prevStorageName, storageName]);
-
-  React.useEffect(() => {
-    const dataJson = JSON.stringify(dataToSave);
-    if (prevDataJson !== dataJson) {
-      storage.set(dataToSave);
-      setPrevDataJson(dataJson);
-    }
-  }, [dataToSave, prevDataJson, storage]);
+  if (prevDataJson !== dataJson && prevStorageName === storageName) {
+    storage.set(dataToSave);
+    setPrevDataJson(dataJson);
+  } else if (prevStorageName !== storageName) {
+    setPrevStorageName(storageName);
+  }
 
   return storage.get();
 }
