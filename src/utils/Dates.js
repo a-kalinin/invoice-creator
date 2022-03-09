@@ -46,11 +46,26 @@ export const getInitialHours = (year, month) => {
     });
 };
 
-export const countMonthsSinceDate = (date) => {
-  const dateObj = new Date(date);
+export const parseDateDDMMYYYY = (dateString) => {
+  if (!/\d\d\.\d\d\.\d\d\d\d/.test(dateString)) return null;
+
+  const [dateStr, monthStr, yearStr] = dateString.split('.')
+  const date = Number(dateStr);
+  const month = Number(monthStr) - 1;
+  const year = Number(yearStr);
+
+  if (month > 11) return null;
+
+  return new Date(year, month, date);
+}
+
+export const getInvoiceNumber = (contractDate) => {
+  const contractDateObj = parseDateDDMMYYYY(contractDate);
   const now = new Date();
-  return now.getMonth() - dateObj.getMonth() + (12 * (now.getFullYear() - dateObj.getFullYear()));
-};
+  const yearStartDate = new Date(String(now.getFullYear()));
+  const start = contractDateObj && contractDateObj > yearStartDate ? contractDateObj : yearStartDate;
+  return now.getMonth() - start.getMonth() + (12 * (now.getFullYear() - start.getFullYear()));
+}
 
 export const get = (year, month) => {
   const startDate = getStartDateObj(year, month);

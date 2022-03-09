@@ -1,24 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import dateformat from 'dateformat';
-import * as Dates from '../../utils/Dates';
-import { CONTRACT_TYPES, contractDate } from '../../utils/constants';
+import { CONTRACT_TYPES, contractDate as initContractDate, STORAGE } from '../../utils/constants';
 import { InvoiceContext } from '../Invoice';
 import { DateContext } from '../Date';
+import useLocalStorageState from '../../hooks/useLocalStorageState';
+import { getInvoiceNumber } from '../../utils/Dates';
 
 const InvoiceBaseContextProvider = ({ children }) => {
   const initYear = new Date().getFullYear();
   const initMonth = new Date().getMonth() - 1;
 
   const [contractType, setContractType] = React.useState(CONTRACT_TYPES.MONTH_RATE);
+  const [contractDate, setContractDate] = useLocalStorageState(STORAGE.CONTRACT_DATE, initContractDate);
   const [year, setYearPure] = React.useState(new Date(initYear, initMonth).getFullYear());
   const [month, setMonth] = React.useState(new Date(initYear, initMonth).getMonth());
   const [date, setDate] = React.useState(dateformat('dd.mm.yyyy'));
-  const [number, setNumber] = React.useState(Dates.countMonthsSinceDate(contractDate));
+  const [number, setNumber] = React.useState(getInvoiceNumber(contractDate));
 
   const setYear = (value) => {
     setYearPure(value.replace(/\D/g, '').replace(/^0/g, '').substr(0, 4));
   };
+
+  React.useEffect(() => {
+    setNumber(getInvoiceNumber(contractDate))
+  }, [contractDate]);
 
   return (
     <InvoiceContext.Provider
@@ -29,6 +35,8 @@ const InvoiceBaseContextProvider = ({ children }) => {
         setNumber,
         contractType,
         setContractType,
+        contractDate,
+        setContractDate,
       }}
     >
       <DateContext.Provider value={{ year, setYear, month, setMonth }}>

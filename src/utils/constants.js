@@ -23,4 +23,5 @@ export const CONTRACT_TYPES = {
 
 export const STORAGE = {
   MONTH_RATE: 'MONTH_RATE',
+  CONTRACT_DATE: 'CONTRACT_DATE',
 }
