@@ -5,6 +5,8 @@ import { months, weekendDays, workingDays } from './constants';
 import { generateFileName } from './various';
 import styles from './pdfStyles';
 import * as Dates from './Dates';
+import dateformat from 'dateformat';
+import { parseDateDDMMYYYY } from './Dates';
 
 class GenPdf {
   constructor(data, orientation = 'p') {
@@ -222,7 +224,7 @@ class GenPdf {
 
     const {
       number, date, myName, my, myBankSwift, myBankAccount,
-      contrAgent, hours, month, year, hourRate,
+      contrAgent, hours, month, year, hourRate, contractDate,
     } = this.data;
     const newNumber =
       /^\d+$/.test(number.toString())
@@ -230,11 +232,9 @@ class GenPdf {
         : number;
     const hoursTotal = hours.reduce((acc, el) => acc + Number(el), 0);
     const amount = numeral(hoursTotal).multiply(hourRate).format('0,0.00');
-    const nextMonth = (month + 1) % 12;
-    const nextMonthYear = month + 1 >= 12 ? year + 1 : year;
     const jobString = `Activity of development software for the month of ${
       months[month]} as per agreement stipulated in date ${
-      months[nextMonth]} 1st ${nextMonthYear}`;
+      dateformat(parseDateDDMMYYYY(contractDate), 'mmmm dS yyyy')}`;
     const weeksCount = Dates.getWeeksCount2(year, month);
 
     const formattedData = [
@@ -453,7 +453,7 @@ class GenPdf2 {
 
     const {
       number, date, myName, my, myBankSwift, myBankAccount,
-      contrAgent, hours, month, year, hourRate, monthRate,
+      contrAgent, hours, month, hourRate, monthRate, contractDate,
     } = this.data;
     const newNumber =
       /^\d+$/.test(number.toString())
@@ -461,11 +461,9 @@ class GenPdf2 {
         : number;
     const hoursTotal = hours.reduce((acc, el) => acc + Number(el), 0);
     const amount = numeral(monthRate).format('0,0.00');
-    const nextMonth = (month + 1) % 12;
-    const nextMonthYear = month + 1 >= 12 ? year + 1 : year;
     const jobString = `Activity of development software for the month of ${
       months[month]} as per agreement stipulated in date ${
-      months[month]} 28th ${nextMonthYear}`;
+      dateformat(parseDateDDMMYYYY(contractDate), 'mmmm dS yyyy')}`;
 
     const formattedData = [
       ...GenPdf2.produceFormatting(),
