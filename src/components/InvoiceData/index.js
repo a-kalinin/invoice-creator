@@ -5,8 +5,9 @@ import { InvoiceContext } from '../../context/Invoice';
 import { DateContext } from '../../context/Date';
 import { filenamePrefix } from '../../utils/constants';
 import { generateFileName } from '../../utils/various';
-import { parseDateDDMMYYYY } from '../../utils/Dates';
+import { parseDateYYYYMMDD } from '../../utils/Dates';
 import styles from './index.module.css';
+import DateInput from '../DateInput';
 
 const InvoiceData = () => {
   const { month, year } = React.useContext(DateContext);
@@ -23,12 +24,11 @@ const InvoiceData = () => {
   const onContractDateChange = (e) => {
     setContractDate(e.target.value);
   };
-  const parsedContractDate = parseDateDDMMYYYY(contractDate);
 
   return (
     <div className={styles.root}>
       <div><strong>Invoice Date:</strong></div>
-      <input value={date} onChange={onDateChange} />
+      <input type="date" value={date} onChange={onDateChange} />
       <br />
       <br />
 
@@ -38,11 +38,8 @@ const InvoiceData = () => {
       <br />
 
       <div><strong>Contract Date:</strong></div>
-      <input value={contractDate} onChange={onContractDateChange} />
-      {parsedContractDate
-        ? ' ' + dateformat(parseDateDDMMYYYY(contractDate), 'dd mmm yyyy')
-        : ' Can\'t parse date'
-      }
+      <input type="date" value={contractDate} onChange={onContractDateChange} />
+      {!parseDateYYYYMMDD(contractDate) && ' Can\'t parse date'}
       <br />
       <br />
 

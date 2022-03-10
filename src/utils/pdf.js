@@ -6,7 +6,7 @@ import { generateFileName } from './various';
 import styles from './pdfStyles';
 import * as Dates from './Dates';
 import dateformat from 'dateformat';
-import { parseDateDDMMYYYY } from './Dates';
+import { parseDateYYYYMMDD } from './Dates';
 
 class GenPdf {
   constructor(data, orientation = 'p') {
@@ -234,7 +234,7 @@ class GenPdf {
     const amount = numeral(hoursTotal).multiply(hourRate).format('0,0.00');
     const jobString = `Activity of development software for the month of ${
       months[month]} as per agreement stipulated in date ${
-      dateformat(parseDateDDMMYYYY(contractDate), 'mmmm dS yyyy')}`;
+      dateformat(parseDateYYYYMMDD(contractDate), 'mmmm dS yyyy')}`;
     const weeksCount = Dates.getWeeksCount2(year, month);
 
     const formattedData = [
@@ -463,7 +463,7 @@ class GenPdf2 {
     const amount = numeral(monthRate).format('0,0.00');
     const jobString = `Activity of development software for the month of ${
       months[month]} as per agreement stipulated in date ${
-      dateformat(parseDateDDMMYYYY(contractDate), 'mmmm dS yyyy')}`;
+      dateformat(parseDateYYYYMMDD(contractDate), 'mmmm dS yyyy')}`;
 
     const formattedData = [
       ...GenPdf2.produceFormatting(),
