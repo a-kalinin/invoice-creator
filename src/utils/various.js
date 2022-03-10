@@ -8,7 +8,7 @@ export const generateFileName = (filenamePrefix, year, month) => (
 export const getInvoiceNumber = (contractDate, invoiceDate) => {
   const contractDateObj = parseDateYYYYMMDD(contractDate);
   const invoiceDateObj = invoiceDate ? parseDateYYYYMMDD(invoiceDate) : new Date();
-  const yearEndDateObj = new Date(invoiceDateObj.getFullYear(), 0, 1, 0, 0, -1);
+  const yearEndDateObj = new Date(invoiceDateObj.getFullYear(), 0, 1, -1);
   const start = contractDateObj && contractDateObj > yearEndDateObj
     ? contractDateObj
     : yearEndDateObj;
