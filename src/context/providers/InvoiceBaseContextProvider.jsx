@@ -11,7 +11,7 @@ const InvoiceBaseContextProvider = ({ children }) => {
   const initYear = new Date().getFullYear();
   const initMonth = new Date().getMonth() - 1;
 
-  const [contractType, setContractType] = React.useState(CONTRACT_TYPES.MONTH_RATE);
+  const [contractType, setContractType] = useLocalStorageState(STORAGE.CONTRACT_TYPE, CONTRACT_TYPES.MONTH_RATE);
   const [contractDate, setContractDate] = useLocalStorageState(STORAGE.CONTRACT_DATE, initContractDate);
   const [year, setYearPure] = React.useState(new Date(initYear, initMonth).getFullYear());
   const [month, setMonth] = React.useState(new Date(initYear, initMonth).getMonth());

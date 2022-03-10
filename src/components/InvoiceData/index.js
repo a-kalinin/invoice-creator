@@ -1,5 +1,4 @@
 import React from 'react';
-import dateformat from 'dateformat';
 import { AddressContext } from '../../context/Address';
 import { InvoiceContext } from '../../context/Invoice';
 import { DateContext } from '../../context/Date';
@@ -7,7 +6,6 @@ import { filenamePrefix } from '../../utils/constants';
 import { generateFileName } from '../../utils/various';
 import { parseDateYYYYMMDD } from '../../utils/Dates';
 import styles from './index.module.css';
-import DateInput from '../DateInput';
 
 const InvoiceData = () => {
   const { month, year } = React.useContext(DateContext);

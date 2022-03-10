@@ -1,28 +1,38 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import useLocalStorage from './useLocalStorage';
 
 /**
  * Hook. Saves passed data in local storage.
  * In case when data exists on hook mounting - returns saved data.
- * IMPORTANT: passed value should be serializable, it will be JSON-stringified, parsed and returned.
+ * @param {string} storageName
+ * @param initialValue
  */
-function useLocalStorageState(storageName, initialState) {
-  const [value, setValue] = React.useState(initialState);
-  const storedValue = useLocalStorage(storageName, value);
+function useLocalStorageState(storageName, initialValue) {
+  const [storedValue, setStoredValue] = React.useState(() => {
+    if (typeof window === "undefined") {
+      return initialValue;
+    }
+    try {
+      const item = window.localStorage.getItem(storageName);
+      return item ? JSON.parse(item) : initialValue;
+    } catch (error) {
+      console.log(error);
+      return initialValue;
+    }
+  });
 
+  const setValue = (value) => {
+    try {
+      // Allow value to be a function, so we have same API as useState
+      const valueToStore = value instanceof Function ? value(storedValue) : value;
+      setStoredValue(valueToStore);
+      if (typeof window !== "undefined") {
+        window.localStorage.setItem(storageName, JSON.stringify(valueToStore));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return [storedValue, setValue];
 }
-
-useLocalStorageState.propTypes = {
-  /** Storage key name */
-  storageName: PropTypes.string.isRequired,
-  /** Storage value */
-  // eslint-disable-next-line react/forbid-prop-types
-  initialState: PropTypes.any,
-};
-
-useLocalStorageState.defaultProps = {
-};
 
 export default useLocalStorageState;
