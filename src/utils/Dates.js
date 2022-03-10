@@ -1,10 +1,8 @@
 export const getStartDateObj = (year, month) => new Date(year, month, 1);
 
-export const getStartDay = (startDate) => startDate.getDay();
-
-export const getStartDay2 = (year, month) => {
+export const getStartDay = (year, month) => {
   const startDate = getStartDateObj(year, month);
-  return getStartDay(startDate);
+  return startDate.getDay();
 };
 
 export const getFormattedDay = (day) => day === 0 ? 6 : day - 1;
@@ -17,7 +15,7 @@ export const getWeeksCount = (daysCount, startDayOfWeek) => {
 };
 
 export const getWeeksCount2 = (year, month) => {
-  const startDay = getStartDay2(year, month);
+  const startDay = getStartDay(year, month);
   const daysCount = getDaysCount(year, month);
   return getWeeksCount(daysCount, startDay);
 };
@@ -57,16 +55,3 @@ export const getInvoiceNumber = (contractDate) => {
   const start = contractDateObj && contractDateObj > yearStartDate ? contractDateObj : yearStartDate;
   return now.getMonth() - start.getMonth() + (12 * (now.getFullYear() - start.getFullYear()));
 }
-
-export const get = (year, month) => {
-  const startDate = getStartDateObj(year, month);
-  const startDay = getStartDay(startDate);
-  const daysCount = getDaysCount(year, month);
-  const weeksCount = getWeeksCount(daysCount, startDay);
-  return {
-    startDate,
-    startDay,
-    daysCount,
-    weeksCount,
-  };
-};

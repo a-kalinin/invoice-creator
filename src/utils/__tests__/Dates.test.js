@@ -13,9 +13,9 @@ describe('Dates', () => {
     test('returns week day for first day in given month', () => {
       const year = 2019;
       const month = 8;
-      expect(Dates.getStartDay2(year, month)).toBe(0);
+      expect(Dates.getStartDay(year, month)).toBe(0);
       const month2 = 7;
-      expect(Dates.getStartDay2(year, month2)).toBe(4);
+      expect(Dates.getStartDay(year, month2)).toBe(4);
     });
   });
 
