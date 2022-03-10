@@ -5,7 +5,7 @@ import { CONTRACT_TYPES, contractDate as initContractDate, STORAGE } from '../..
 import { InvoiceContext } from '../Invoice';
 import { DateContext } from '../Date';
 import useLocalStorageState from '../../hooks/useLocalStorageState';
-import { getInvoiceNumber } from '../../utils/Dates';
+import { getInvoiceNumber } from '../../utils/various';
 
 const InvoiceBaseContextProvider = ({ children }) => {
   const initYear = new Date().getFullYear();

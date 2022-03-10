@@ -1,9 +1,4 @@
-export const getStartDateObj = (year, month) => new Date(year, month, 1);
-
-export const getStartDay = (year, month) => {
-  const startDate = getStartDateObj(year, month);
-  return startDate.getDay();
-};
+export const getStartDay = (year, month) => new Date(year, month, 1).getDay();
 
 export const getFormattedDay = (day) => day === 0 ? 6 : day - 1;
 
@@ -46,12 +41,4 @@ export const getInitialHours = (year, month) => {
 
 export const parseDateYYYYMMDD = (dateString) => {
   return /\d\d\d\d[-.]\d\d[-.]\d\d/.test(dateString) ? new Date(dateString) : null;
-}
-
-export const getInvoiceNumber = (contractDate) => {
-  const contractDateObj = parseDateYYYYMMDD(contractDate);
-  const now = new Date();
-  const yearStartDate = new Date(String(now.getFullYear()));
-  const start = contractDateObj && contractDateObj > yearStartDate ? contractDateObj : yearStartDate;
-  return now.getMonth() - start.getMonth() + (12 * (now.getFullYear() - start.getFullYear()));
 }

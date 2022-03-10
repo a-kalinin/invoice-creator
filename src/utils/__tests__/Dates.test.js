@@ -1,15 +1,7 @@
 import * as Dates from '../Dates';
 
 describe('Dates', () => {
-  describe('getStartDateObj ', () => {
-    test('returns dateObject with first date for given year and month', () => {
-      const year = 2019;
-      const month = 8;
-      expect(Dates.getStartDateObj(year, month)).toEqual(new Date(year, month, 1));
-    })
-  });
-
-  describe('getStartDay2 ', () => {
+  describe('getStartDay ', () => {
     test('returns week day for first day in given month', () => {
       const year = 2019;
       const month = 8;
