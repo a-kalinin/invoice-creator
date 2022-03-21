@@ -65,7 +65,7 @@ class GenPdf {
     [
       { content: '', styles: styles.subheader1 },
       { content: `INVOICE #${newNumber}`, colSpan: 3, styles: styles.subheader2 },
-      { content: `DATE ${date}`, colSpan: 3, styles: styles.subheader3 },
+      { content: `DATE ${dateformat(parseDateYYYYMMDD(date), 'dd.mm.yyyy')}}`, colSpan: 3, styles: styles.subheader3 },
       { content: '', styles: styles.subheader1 },
     ],
   ]);
@@ -341,7 +341,7 @@ class GenPdf2 {
     [
       { content: '', styles: styles.subheader1 },
       { content: `INVOICE #${newNumber}`, colSpan: 3, styles: styles.subheader2 },
-      { content: `DATE ${date}`, colSpan: 3, styles: styles.subheader3 },
+      { content: `DATE ${dateformat(parseDateYYYYMMDD(date), 'dd.mm.yyyy')}`, colSpan: 3, styles: styles.subheader3 },
       { content: '', styles: styles.subheader1 },
     ],
   ]);
