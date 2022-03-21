@@ -2,7 +2,6 @@ import React from 'react';
 import { AddressContext } from '../../context/Address';
 import { InvoiceContext } from '../../context/Invoice';
 import { DateContext } from '../../context/Date';
-import { filenamePrefix } from '../../utils/constants';
 import { generateFileName } from '../../utils/various';
 import { parseDateYYYYMMDD } from '../../utils/Dates';
 import styles from './index.module.css';
@@ -17,13 +16,20 @@ const InvoiceData = () => {
     setNumber,
     contractDate,
     setContractDate,
+    filePrefix,
+    setFilePrefix,
   } = React.useContext(InvoiceContext);
   const {
     my,
+    setMy,
     myName,
+    setMyName,
     myBankSwift,
+    setMyBankSwift,
     myBankAccount,
+    setMyBankAccount,
     contrAgent,
+    setContrAgent,
   } = React.useContext(AddressContext);
   const onDateChange = (e) => {
     setDate(e.target.value);
@@ -56,24 +62,28 @@ const InvoiceData = () => {
       <br />
 
       <div><strong>My Name:</strong> <small>(change in .env or .env.local)</small></div>
-      <EditableDiv content={myName} onChange={() => {}}/>
+      <EditableDiv content={myName} onChange={setMyName} />
       <br />
 
       <div><strong>My Data:</strong> <small>(change in .env or .env.local)</small></div>
-      {my.map((el, i) => <div key={`${el}_${i}`}>{el}</div>)}
+      <EditableDiv onChange={setMy} content={my} />
       <br />
 
       <div><strong>My Bank Details:</strong> <small>(change in .env or .env.local)</small></div>
-      <div>{myBankSwift}</div>
-      <div>{myBankAccount}</div>
+      <EditableDiv onChange={setMyBankSwift} content={myBankSwift} />
+      <EditableDiv onChange={setMyBankAccount} content={myBankAccount} />
       <br />
 
       <div><strong>Contragent Data:</strong> <small>(change in .env or .env.local)</small></div>
-      {contrAgent.map((el, i) => <div key={`${el}_${i}`}>{el}</div>)}
+      <EditableDiv onChange={setContrAgent} content={contrAgent} />
       <br />
 
-      <div><strong>Filename:</strong> <small>(change in .env or .env.local)</small></div>
-      <div>{generateFileName(filenamePrefix, year, month)}</div>
+      <div><strong>Filename Prefix:</strong> <small>(change in .env or .env.local)</small></div>
+      <EditableDiv onChange={setFilePrefix} content={filePrefix} />
+      <br />
+
+      <div><strong>Generated Filename:</strong></div>
+      <div>{generateFileName(filePrefix, year, month)}</div>
     </div>
   );
 }

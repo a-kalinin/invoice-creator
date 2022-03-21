@@ -8,25 +8,28 @@ import InvoiceBaseContextProvider from '../../context/providers/InvoiceBaseConte
 import HourRateContractContextProvider
   from '../../context/providers/HourRateContractContextProvider';
 import MonthRateContractForm from '../../components/MonthRateContractForm';
+import AddressContextProvider from '../../context/providers/AddressContextProvider';
 
 const Landing = () => {
   return (
-    <InvoiceBaseContextProvider>
-      <HourRateContractContextProvider>
-        <div className={style.flex}>
-          <div>
-            <InvoiceMonthForm />
-            <HourRateContractForm />
-            <MonthRateContractForm />
+    <AddressContextProvider>
+      <InvoiceBaseContextProvider>
+        <HourRateContractContextProvider>
+          <div className={style.flex}>
+            <div>
+              <InvoiceMonthForm />
+              <HourRateContractForm />
+              <MonthRateContractForm />
+            </div>
+            <div>
+              <InvoiceData />
+              <br />
+              <PdfButton />
+            </div>
           </div>
-          <div>
-            <InvoiceData />
-            <br />
-            <PdfButton />
-          </div>
-        </div>
-      </HourRateContractContextProvider>
-    </InvoiceBaseContextProvider>
+        </HourRateContractContextProvider>
+      </InvoiceBaseContextProvider>
+    </AddressContextProvider>
   );
 };
 

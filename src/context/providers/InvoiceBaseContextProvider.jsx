@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import dateformat from 'dateformat';
-import { CONTRACT_TYPES, contractDate as initContractDate, STORAGE } from '../../utils/constants';
+import {
+  CONTRACT_TYPES, contractDate as initContractDate, filenamePrefix, STORAGE
+} from '../../utils/constants';
 import { InvoiceContext } from '../Invoice';
 import { DateContext } from '../Date';
 import useLocalStorageState from '../../hooks/useLocalStorageState';
@@ -11,6 +13,7 @@ const InvoiceBaseContextProvider = ({ children }) => {
   const initYear = new Date().getFullYear();
   const initMonth = new Date().getMonth() - 1;
 
+  const [filePrefix, setFilePrefix] = useLocalStorageState(STORAGE.FILE_PREFIX, filenamePrefix);
   const [contractType, setContractType] = useLocalStorageState(STORAGE.CONTRACT_TYPE, CONTRACT_TYPES.MONTH_RATE);
   const [contractDate, setContractDate] = useLocalStorageState(STORAGE.CONTRACT_DATE, initContractDate);
   const [year, setYearPure] = React.useState(new Date(initYear, initMonth).getFullYear());
@@ -37,6 +40,8 @@ const InvoiceBaseContextProvider = ({ children }) => {
         setContractType,
         contractDate,
         setContractDate,
+        filePrefix,
+        setFilePrefix,
       }}
     >
       <DateContext.Provider value={{ year, setYear, month, setMonth }}>

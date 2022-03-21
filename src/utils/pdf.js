@@ -226,6 +226,8 @@ class GenPdf {
       number, date, myName, my, myBankSwift, myBankAccount,
       contrAgent, hours, month, year, hourRate, contractDate,
     } = this.data;
+    const myData = my.split("\n");
+    const contrAgentData = contrAgent.split("\n");
     const newNumber =
       /^\d+$/.test(number.toString())
         ? `00-${numeral(number).format('000000')}`
@@ -240,7 +242,7 @@ class GenPdf {
     const formattedData = [
       ...GenPdf.produceFormatting(),
       ...GenPdf.produceHeader({ myName, newNumber, date }),
-      ...GenPdf.produceAddressArea({ my, contrAgent }),
+      ...GenPdf.produceAddressArea({ my: myData, contrAgent: contrAgentData }),
       ...GenPdf.produceTable({ jobString, hoursTotal, hourRate, amount }),
       ...GenPdf.produceFooter({ amount }),
       ...GenPdf.produceAccount({ myName, myBankSwift, myBankAccount }),
@@ -455,6 +457,8 @@ class GenPdf2 {
       number, date, myName, my, myBankSwift, myBankAccount,
       contrAgent, hours, month, hourRate, monthRate, contractDate,
     } = this.data;
+    const myData = my.split("\n");
+    const contrAgentData = contrAgent.split("\n");
     const newNumber =
       /^\d+$/.test(number.toString())
         ? `00-${numeral(number).format('000000')}`
@@ -468,7 +472,7 @@ class GenPdf2 {
     const formattedData = [
       ...GenPdf2.produceFormatting(),
       ...GenPdf2.produceHeader({ myName, newNumber, date }),
-      ...GenPdf2.produceAddressArea({ my, contrAgent }),
+      ...GenPdf2.produceAddressArea({ my: myData, contrAgent: contrAgentData }),
       ...GenPdf2.produceTable({ jobString, hoursTotal, hourRate, amount }),
       ...GenPdf2.produceFooter({ amount }),
       ...GenPdf2.produceAccount({ myName, myBankSwift, myBankAccount }),

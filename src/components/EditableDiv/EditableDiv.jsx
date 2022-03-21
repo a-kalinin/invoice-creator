@@ -10,15 +10,19 @@ const EditableDiv = ({ content, onChange }) => {
     <div className={style.root}>
       <div className={style.content}>
         {!editing
-          ? <div ref={ref} className={style.text}>{content}</div>
+          ? (
+            <div ref={ref} className={style.text}>
+              {(content || '')
+                .split("\n")
+                .map((str, i) => (<div key={i}>{str}</div>))
+              }
+            </div>
+          )
           : (
             <textarea
               ref={ref}
               className={style.textarea}
-              value={content}
-              onChange={(e) => {
-                onChange(e.target.value);
-              }}
+              defaultValue={content}
             />
           )
         }
@@ -37,7 +41,7 @@ const EditableDiv = ({ content, onChange }) => {
           className={style.button}
           type="button"
           onClick={() => {
-            onChange(ref.current.value);
+            if (editing) onChange(ref.current.value);
             setEditing(!editing)
           }}
         >

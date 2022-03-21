@@ -13,7 +13,7 @@ function useLocalStorageState(storageName, initialValue) {
     }
     try {
       const item = window.localStorage.getItem(storageName);
-      return item ? JSON.parse(item) : initialValue;
+      return item && item !== 'undefined' ? JSON.parse(item) : initialValue;
     } catch (error) {
       console.log(error);
       return initialValue;

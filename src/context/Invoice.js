@@ -7,4 +7,8 @@ export const InvoiceContext = React.createContext({
   setNumber: () => {},
   contractType: '',
   setContractType: () => {},
+  contractDate: '',
+  setContractDate: () => {},
+  filePrefix: '',
+  setFilePrefix: () => {},
 });
