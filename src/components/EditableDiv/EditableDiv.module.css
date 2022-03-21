@@ -1,0 +1,30 @@
+.root{
+  display: flex;
+}
+
+.content{
+  margin-right: 10px;
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+.buttons{
+  display: flex;
+  flex-direction: column;
+}
+
+.text{
+  max-width: 300px;
+}
+
+.textarea{
+  min-height: 100px;
+  max-width: 300px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.button{
+  align-self: flex-start;
+  margin-bottom: 10px;
+}

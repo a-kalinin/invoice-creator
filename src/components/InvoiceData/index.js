@@ -6,11 +6,25 @@ import { filenamePrefix } from '../../utils/constants';
 import { generateFileName } from '../../utils/various';
 import { parseDateYYYYMMDD } from '../../utils/Dates';
 import styles from './index.module.css';
+import EditableDiv from '../EditableDiv/EditableDiv';
 
 const InvoiceData = () => {
   const { month, year } = React.useContext(DateContext);
-  const { date, setDate, number, setNumber, contractDate, setContractDate } = React.useContext(InvoiceContext);
-  const { my, myName, myBankSwift, myBankAccount, contrAgent } = React.useContext(AddressContext);
+  const {
+    date,
+    setDate,
+    number,
+    setNumber,
+    contractDate,
+    setContractDate,
+  } = React.useContext(InvoiceContext);
+  const {
+    my,
+    myName,
+    myBankSwift,
+    myBankAccount,
+    contrAgent,
+  } = React.useContext(AddressContext);
   const onDateChange = (e) => {
     setDate(e.target.value);
   };
@@ -42,7 +56,7 @@ const InvoiceData = () => {
       <br />
 
       <div><strong>My Name:</strong> <small>(change in .env or .env.local)</small></div>
-      <div>{myName}</div>
+      <EditableDiv content={myName} onChange={() => {}}/>
       <br />
 
       <div><strong>My Data:</strong> <small>(change in .env or .env.local)</small></div>
